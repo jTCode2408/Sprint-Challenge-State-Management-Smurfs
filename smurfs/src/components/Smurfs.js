@@ -35,9 +35,9 @@ return(
 
 const mapStateToProps =state =>{
     return{
-        loading:state.loading,
-        gettingSmurfs: state.gettingSmurfs,
-        error: state.error
+        loading:state.smurfReducer.loading,
+        gettingSmurfs: state.smurfReducer.gettingSmurfs,
+        error: state.smurfReducer.error
     };
 }
 
