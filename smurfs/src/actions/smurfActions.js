@@ -14,10 +14,10 @@ axios
 .get('http://localhost:3333/smurfs')
 .then(res =>{
     console.log ('SMurF RES',res)
-    dispatch({type:FETCHING_SMURFS_SUCCESS, payload:res})
+    dispatch({type:FETCHING_SMURFS_SUCCESS, payload:res.data})
 })
 .catch(err =>{
-    console.log('GET ERROR', error)
+    console.log('GET ERROR', err)
     dispatch({type:FETCHING_SMURFS_FAIL, payload:err.res})
 })
 

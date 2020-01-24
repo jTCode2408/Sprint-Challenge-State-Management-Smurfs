@@ -1,5 +1,5 @@
 //reducer for handling smurfs returning
-import {FETCHING_SMURF_FAIL, FETCHING_SMURF_SUCCESS, FETCHING_SMURF_START} from '../actions/smurfActions';
+import {FETCHING_SMURFS_FAIL, FETCHING_SMURFS_SUCCESS, FETCHING_SMURFS_START} from '../actions/smurfActions';
 
 const initialState = {
 loading:false,
@@ -10,13 +10,13 @@ error: ''
 
 export const smurfReducer = (state= initialState, action)=>{
 switch(action.type){
-    case FETCHING_SMURF_START:
+    case FETCHING_SMURFS_START:
         return{
             ...state,
             loading:true
         };
 
-        case FETCHING_SMURF_SUCCESS:
+        case FETCHING_SMURFS_SUCCESS:
             return{
                 ...state, 
                 loading: false,
@@ -24,7 +24,7 @@ switch(action.type){
 
             };
 
-            case FETCHING_SMURF_FAIL:
+            case FETCHING_SMURFS_FAIL:
                 return{
                     ...state,
                     loading: null,
