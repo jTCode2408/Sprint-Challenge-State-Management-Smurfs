@@ -1,26 +1,25 @@
-import {ADDING_SMURF_START, ADDING_SMURF_FAIL, ADDING_SMURF_SUCCESS} from '../actions/formActions';
+import {SMURF_SUCCESS} from '../actions/formActions';
 
-const initialState =[
-{   name:'',
-age:'',
-height: ''
-},
-
-]
+const initialState ={
+    loading: '',
+    smurfs: [],
+    error:''
+}
 
 export const formReducer = (state=initialState,action)=>{
-switch(action.type){
-
-    case ADDING_SMURF_SUCCESS: 
-    const newSmurf = {
-        name: action.payload.name,
-        age: action.payload.age,
-        height:action.payload.height
-    }
-    return ([...state, newSmurf])
-
+    switch(action.type){
+    case SMURF_SUCCESS:
+        const newSmurf = {
+            ...action.payload,
+            id: Date.now()
+        }
+        return {
+            ...state,
+            smurfs: [
+                ...state.smurfs, newSmurf
+            ]
+        }
     default:
         return state
-};
-
+}
 }

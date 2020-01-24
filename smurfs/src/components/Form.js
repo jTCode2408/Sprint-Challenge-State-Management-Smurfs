@@ -1,11 +1,10 @@
 //form to add smurf via post req.
 import React, {useState} from 'react'
 import { connect } from 'react-redux';
-import {addSmurfs} from '../actions/formActions';
+import {smurfForm} from '../actions/formActions';
 
 
-const Form = props =>{
-
+const Form = (props) =>{
  const [newSmurfs, setNewSmurfs] = useState({
      name: '',
      age: '',
@@ -20,13 +19,16 @@ setNewSmurfs({
 });
 console.log (e.target.value)
 }
-const submitForm = e =>{
+const handleSubmit = e =>{
     e.preventDefault();
-    props.addSmurfs(newSmurfs);
-    setNewSmurfs({name: '', age:'', height:''})
-};
+    setNewSmurfs(newSmurfs);
+    }
+
+
+
+
 return(
-<form onSubmit ={submitForm}>
+<form onSubmit ={handleSubmit}>
 <input 
 type="text"
 placeholder = "name"
@@ -48,19 +50,32 @@ placeholder = "height"
 value={newSmurfs.height}
 onChange ={handleChanges}
 />
-<button onClick ={()=>props.addSmurfs(newSmurfs)}>Add A Smurf</button>
+<button onClick ={()=>props.smurfForm(newSmurfs)}>Add A Smurf</button>
 
-</form>
+{props.smurfs.map(smurf => {
+    return (
+        <ul>
+       <li> Name: {smurf.name}</li>
+       <li> Age: {smurf.age}</li>
+       <li> Height: {smurf.height}</li>
+
+    </ul>
 )
-}
+    })}; 
+    {/*map for displaying post data on screen*/}
+</form>
 
+
+)
+
+}
 const mapStateToProps = state => {
     return{
-        name: state.formReducer.name,
-        age: state.formReducer.age,
-        height:state.formReducer.height
+        loading: state.formReducer.loading,
+        smurfs: state.formReducer.smurfs,
+        eror: state.formReducer.error
 
     }
 }
 
-export default connect(mapStateToProps,{addSmurfs})(Form)
+export default connect(mapStateToProps,{smurfForm})(Form)
